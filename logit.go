@@ -2,6 +2,7 @@ package logit
 
 import (
 	"io"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -83,8 +84,12 @@ func (l *Logger) Output(msg string) error {
 		case string:
 			// ToDo: currently presuming everything is a string
 			str += k + "=" + vv + " "
+		case int:
+			str += k + "=" + strconv.Itoa(vv) + " "
+		case time.Duration:
+			str += k + "=" + vv.String() + " "
 		default:
-			str += k + "=" + "(unknown type)"
+			str += k + "=" + "(unknown type) "
 		}
 	}
 
