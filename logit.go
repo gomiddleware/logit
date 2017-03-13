@@ -2,6 +2,7 @@ package logit
 
 import (
 	"io"
+	"os"
 	"strconv"
 	"sync"
 	"time"
@@ -63,6 +64,12 @@ func (l *Logger) WithField(key string, value interface{}) {
 // Log just logs a message to the output. It doesn't do anything special.
 func (l *Logger) Log(msg string) error {
 	return l.Output(msg)
+}
+
+// Fatal is equivalent to Log() followed by a call to os.Exit(1).
+func (l *Logger) Fatal(msg string) {
+	l.Output(msg)
+	os.Exit(1)
 }
 
 // Output writes the output for a logging event.
