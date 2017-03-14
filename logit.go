@@ -86,26 +86,25 @@ func (l *Logger) Output(evt string) error {
 	// time
 	str := "ts="
 	str += time.Now().UTC().Format("20060102-150405.000000000")
-	str += " "
 
 	// sys
-	str += "sys=" + l.sys + " "
+	str += " sys=" + l.sys
 
 	// message
-	str += "evt=" + evt
+	str += " evt=" + evt
 
 	// now do all of the fields
 	for k, v := range l.fields {
 		switch vv := v.(type) {
 		case string:
 			// ToDo: currently presuming everything is a string
-			str += k + "=" + vv + " "
+			str += " " + k + "=" + vv
 		case int:
-			str += k + "=" + strconv.Itoa(vv) + " "
+			str += " " + k + "=" + strconv.Itoa(vv)
 		case time.Duration:
-			str += k + "=" + vv.String() + " "
+			str += " " + k + "=" + vv.String()
 		default:
-			str += k + "=" + "(unknown type) "
+			str += " " + k + "=" + "(unknown)"
 		}
 	}
 
