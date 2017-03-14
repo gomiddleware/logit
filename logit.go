@@ -84,7 +84,7 @@ func (l *Logger) Output(evt string) error {
 	defer l.mu.Unlock()
 
 	// time
-	str := "time="
+	str := "ts="
 	str += time.Now().UTC().Format("20060102-150405.000000000")
 	str += " "
 
