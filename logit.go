@@ -91,6 +91,9 @@ func (l *Logger) Output(evt string) error {
 	// sys
 	str += "sys=" + l.sys + " "
 
+	// message
+	str += "evt=" + evt
+
 	// now do all of the fields
 	for k, v := range l.fields {
 		switch vv := v.(type) {
@@ -105,9 +108,6 @@ func (l *Logger) Output(evt string) error {
 			str += k + "=" + "(unknown type) "
 		}
 	}
-
-	// message
-	str += "evt=" + evt
 
 	// newline
 	str += "\n"
